@@ -51,3 +51,4 @@ optional arguments:
                         Number of processes to spawn. Default = half of the
                         number of CPU
 ```
+© [Bikash Kumar Bhandari](https://bkb3.github.io), [Chun Shem Lim](https://github.com/lcscs12345), [Paul P Gardner](https://github.com/ppgardne) (2019)
