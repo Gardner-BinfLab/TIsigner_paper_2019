@@ -1,4 +1,4 @@
-### Bhandari BK, Lim CS, Gardner PP. Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv doi: 
+#### Bhandari BK, Lim CS, Gardner PP. Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv doi: 
 - Scripts and Jupyter notebooks to reproduce the results and figures in this preprint.
 - Dependencies can be installed using Anaconda. For example,
 ```conda install -c bioconda viennarna```
