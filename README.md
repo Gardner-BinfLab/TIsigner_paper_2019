@@ -49,4 +49,5 @@ optional arguments:
                         openen
   -p INT, --processes INT
                         Number of processes to spawn. Default = half of the
-                        number of CPU```
+                        number of CPU
+```
