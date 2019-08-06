@@ -1,6 +1,6 @@
 ### Bhandari BK, Lim CS, Gardner PP. Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv doi: 
 - Scripts and Jupyter notebooks to reproduce the results and figures in this preprint.
-- Dependencies can be installed in Anaconda by
+- Dependencies can be installed using Anaconda. For example,
 ```conda install -c bioconda viennarna```
 - openen.py is a wrapper for RNAplfold using multiprocessing. It is useful to calculate opening energy of multi fasta sequences. The output can be analysed as in Fig1_2_S1_S2.ipynb
 
