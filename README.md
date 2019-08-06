@@ -3,7 +3,9 @@
 - Dependencies can be installed in Anaconda by
 ```conda install -c bioconda viennarna```
 - openen.py is a wrapper for RNAplfold using multiprocessing. It is useful to calculate opening energy of multi fasta sequences. The output can be analysed as in Fig1_2_S1_S2.ipynb
-```python openen.py -h
+
+```console
+$ python openen.py -h
 usage: openen.py [-h] -s STR [-U STR/INT] [-x] [-W INT] [-u INT] [-S] [-n INT]
                  [-t INT] [-e] [-i INT] [-l INT] [-r] [-o STR] [-p INT]
 
