@@ -2,7 +2,7 @@
 - This repository contains the scripts and Jupyter notebooks to reproduce the results and figures of this preprint. The source code of TIsigner webserver is available [here](https://github.com/Gardner-BinfLab/TIsigner).
 - Dependencies can be installed using Anaconda3. For example,
 ```conda install -c bioconda viennarna```. ViennaRNA can also be installed according to the instructions [here](https://www.tbi.univie.ac.at/RNA/documentation.html#install).
-- IXnos requires python2 to run (https://github.com/lareaulab/iXnos/)
+- [IXnos](https://github.com/lareaulab/iXnos/) requires python2 to run.
 - openen.py is a wrapper for RNAplfold using multiple processes. It is useful to calculate the opening energy of multi-fasta sequences. The output can be analysed as in Fig1_2_S1_S2.ipynb
 
 ```console
