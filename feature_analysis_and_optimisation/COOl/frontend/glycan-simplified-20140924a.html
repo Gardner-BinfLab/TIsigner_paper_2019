@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="  ext-strict" style="height:100%;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="language" content="en">
+	<!-- 
+	NOTE: Need <!DOCTYPE html> at top for popup to work with internet
+	explorer, but this cause alignment to shift to center. Added on 
+	various text-align: center in style (for central content cell and 
+	JSMol Div) to compensate
+	-->
+	<link rel="stylesheet" type="text/css" href="style-glycan-plus.css">
+	<link rel="stylesheet" type="text/css" href="style-glycan-popup.css">
+	<link rel="stylesheet" type="text/css" href="glycan/glycan.css">
+	<link rel="stylesheet" type="text/css" href="glycan/ext-all.css">
+	<link rel="stylesheet" type="text/css" href="glycan/xtheme-gray.css"> 
+	<link rel="stylesheet" type="text/css" href="glycan/fileuploadfield.css"> 
+	
+	<!-- Table Sorter Stuff -->
+	<link rel="stylesheet" type="text/css" href="style-glycan-tablesorter.css">
+	<script type="text/javascript" src="javascript/tablesorter/jquery-latest.js"></script>		
+	<script type="text/javascript" src="javascript/tablesorter/jquery.tablesorter.js"></script>
+	
+	<title>BTI Glycan Modeler 1.01</title>
+</head>
+
+<body bgcolor="#f3f3f3" class="   ext-webkit ext-chrome" style="height:100%;">
+	<div style="width:100%; height:100%; text-align:center;">
+		<!-- Cell Spacing 0 for IE which does not parse border-spacing correctly --> 
+		<table cellspacing='2' style="width:980px; margin-left:auto; margin-right:auto; height:100%; border-collapse:separate; border-spacing: 2px 2px;">
+			<tbody>
+				<tr>
+					<!-- Left shadow spans all 4 rows -->
+					<td rowspan='4' class="layout-left-shadow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td>
+						<!-- Banner -->
+						<div id="header" style="width:1000px; height:150px; margin-left:auto; margin-right:auto;">
+							<img src="glycan/images/Header-LinkerDB.png" />
+						</div>
+					</td>
+					<!-- Right shadow spans all 4 rows -->
+					<td rowspan='4' class="layout-right-shadow">&nbsp;&nbsp;&nbsp;</td>			
+				</tr>
+				
+				<!-- 2nd Row: Linking Tabs -->
+				<tr>
+					<td>
+						<!-- Top Tab Links -->
+						<div class="x-tab-panel-header x-unselectable" style="width: 998px;">
+							<div class="x-tab-strip-wrap">
+								<ul class="x-tab-strip x-tab-strip-top">
+									<li class="x-tab-strip-active">
+										<span class="x-tab-strip-close"></span>
+										<span class="x-tab-right">
+											<em class="x-tab-left">
+												<span class="x-tab-strip-inner">
+													<span class="x-tab-strip-text ">Current Tab</span>
+												</span>
+											</em>
+										</span>
+									</li>
+									<li class="">
+										<span class="x-tab-strip-close"></span>
+										<span class="x-tab-right">
+											<em class="x-tab-left">
+												<span class="x-tab-strip-inner">
+													<span class="x-tab-strip-text "><a href="index.php">Linking Tab (no JS)</a></span>
+												</span>
+											</em>
+										</span>
+									</li>
+									<li class="x-tab-strip-over">
+										<span class="x-tab-strip-close"></span>
+										<span class="x-tab-right" href="index.php">
+											<em class="x-tab-left">
+												<span class="x-tab-strip-inner">
+													<span class="x-tab-strip-text "><a href="index.php">Mouseover Tab (no JS)</a></span>
+												</span>
+											</em>
+										</span>
+									</li>
+									
+									<li class="" onmouseover="TopTabMouseover(this)" onmouseout="TopTabMouseout(this)" >
+										<span class="x-tab-strip-close"></span>
+										<span class="x-tab-right" href="index.php">
+											<em class="x-tab-left">
+												<span class="x-tab-strip-inner">
+													<span class="x-tab-strip-text "><a href="index.php">Link Mouseover Tab (with JS)</a></span>
+												</span>
+											</em>
+										</span>
+									</li>
+									<script type="text/javascript">
+										<!--
+										function TopTabMouseover(inElement)
+										{ inElement.className="x-tab-strip-over"; }
+										function TopTabMouseout(inElement)
+										{ inElement.className=""; }
+										-->
+									</script>
+									
+									<!-- this edge caps the tab width in Internet Explorer -->
+									<li class="x-tab-edge">
+										<span class="x-tab-strip-text">&nbsp;</span>
+									</li>
+									<!-- The bottom bar (must be within UL element) -->
+									<div class="x-clear"></div>
+								</ul>
+							</div>
+							<div class="x-tab-strip-spacer"></div>
+						</div>
+					</td>
+				</tr>
+				
+				<!-- 3rd row: Main content (height of 100% ensures footer will always be at bottom) -->
+				<tr>
+					<td style="height:100%; vertical-align:top; text-align:left;">
+
+						<!-- Simple Help + Header + Section Example -->
+						<div class=" x-tab-panel" style="width: 1000px; ">
+							<!-- Help Button -->
+							<div class="x-tab-panel-tbar" style="width: 1000px; ">
+								<div class="x-toolbar x-small-editor x-toolbar-layout-ct" style="width: 998px; ">
+									<table cellspacing="0" class="x-toolbar-ct">
+										<tbody>
+											<tr>
+												<td class="x-toolbar-left" align="left">
+													<table cellspacing="0">
+														<tbody>
+															<tr class="x-toolbar-left-row"></tr>
+														</tbody>
+													</table>
+												</td>
+												<td class="x-toolbar-right" align="right">
+													<table cellspacing="0" class="x-toolbar-right-ct">
+														<tbody>
+															<tr>
+																<td>
+																	<table cellspacing="0">
+																		<tbody>
+																			<tr class="x-toolbar-right-row">
+																				<td class="x-toolbar-cell">
+																					<table cellspacing="0" class="x-btn x-btn-text-icon" style="width: 70px; ">
+																						<tbody class="x-btn-small x-btn-icon-small-left">
+																							<tr>
+																								<td class="x-btn-tl"><i>&nbsp;</i></td>
+																								<td class="x-btn-tc"></td>
+																								<td class="x-btn-tr"><i>&nbsp;</i></td>
+																							</tr>
+																							<tr>
+																								<td class="x-btn-ml"><i>&nbsp;</i></td>
+																								<td class="x-btn-mc">
+																									<em class="" unselectable="on">
+																										<button type="button" style="background-image: url(glycan/images/help_icon.png); " class=" x-btn-text">&nbsp;Help</button>
+																									</em>
+																								</td>
+																								<td class="x-btn-mr"><i>&nbsp;</i></td>
+																							</tr>
+																							<tr>
+																								<td class="x-btn-bl"><i>&nbsp;</i></td>
+																								<td class="x-btn-bc"></td>
+																								<td class="x-btn-br"><i>&nbsp;</i></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+																<td>
+																	<table cellspacing="0">
+																		<tbody>
+																			<tr class="x-toolbar-extras-row"></tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>					
+							<!-- Central Content -->
+							<div class="x-tab-panel-bwrap">
+								<div class="x-tab-panel-body x-tab-panel-body-top" style="width: 998px;">
+									<div class=" x-panel x-panel-noborder" style="width: 998px; ">
+										<div class="x-panel-bwrap">
+											<div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" style="width: 998px;">
+												<div style="margin-left:auto;margin-right:auto; width:1000px">
+													<div class=" x-panel" style="width: 1000px; ">
+														<!-- Title Bar -->
+														<div class="x-panel-tl">
+															<div class="x-panel-tr">
+																<div class="x-panel-tc">
+																	<div class="x-panel-header x-unselectable">
+																		<span class="x-panel-header-text">Section Below has "Harder" Borders, and bottom border</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														<!-- Content -->
+														<div class="x-panel-bwrap">
+															<div class="x-panel-ml">
+																<div class="x-panel-mr">
+																	<div class="x-panel-mc">
+																		<div class="x-box-inner" style="width: 988px;">
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog. 
+																			The Quick Brown Fox Jumped over the lazy dog.
+																			<br/><br/>
+																			<form action="" method="get" name="query_form">
+																				<input class="stylebutton" name="posted" type="submit" value="Submit Query"/>
+																				<br/><br/><!-- line break to allow shadow -->
+																				<input class="minimalstylebutton" name="posted" type="submit" value="Minimal Styled Button"/>
+																			</form>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- Bottom Border -->
+															<div class="x-panel-bl">
+																<div class="x-panel-br">
+																	<div class="x-panel-bc">
+																		<div class="x-panel-footer x-panel-btns" style="width:978px;">
+																			<div class="x-clear" ></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Table Sorter Example -->
+						<div class=" x-tab-panel" style="width: 1000px; ">				
+							<!-- Central Content -->
+							<div class="x-tab-panel-bwrap">
+								<div class="x-tab-panel-body x-tab-panel-body-top" style="width: 998px;">
+									<div class=" x-panel x-panel-noborder" style="width: 998px; ">
+										<div class="x-panel-bwrap">
+											<div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" style="width: 998px;">
+												<div style="margin-left:auto;margin-right:auto; width:1000px">
+													<div class=" x-panel" style="width: 1000px; ">
+														<!-- Title Bar -->
+														<div class="x-panel-tl">
+															<div class="x-panel-tr">
+																<div class="x-panel-tc">
+																	<div class="x-panel-header x-unselectable">
+																		<span class="x-panel-header-text">Table Sorter Test</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														<!-- Content -->
+														<div class="x-panel-bwrap">
+															<div class="x-panel-ml">
+																<div class="x-panel-mr">
+																	<div class="x-panel-mc">
+																		<div class="x-box-inner" style="width: 988px;">
+																			For some reason, in Internet Explorer, the Mouseover effects on the header row are 
+																			dead, but sorting (and class change after clicking) stil work. Placing the table
+																			outside the DIVs also does not fix the problem.<br/><br/>
+																			<!-- Cell Spacing 0 for IE which does not parse border-spacing correctly --> 
+																			<table id='linker_search_result_table' class='tablesorter' cellspacing='0'>
+																				<thead>
+																					<tr>
+																						<th id='nonsort_override' colspan='2'>PDB Entry</th>
+																						<th id='nonsort_override' colspan='2'>Range</th>
+																						<th id='nonsort_override' colspan='3'>Linker Information</th>
+																						<th id='nonsort_override' colspan='2'>Conformation</th>
+																					</tr>
+																					<tr>
+																						<th>Accession</th>
+																						<th>Name</th>
+																						<th>Start</th>
+																						<th>End</th>
+																						<th>ID</th>
+																						<th>Length</th>
+																						<th>Sequence</th>
+																						<th>Download</th>
+																						<th>View</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<td>1IQ8A</td>
+																						<td><div class='protein_name_column'>ARCHAEOSINE TRNA-GUANINE TRANSGLYCOSYLASE</div></td>
+																						<td>455</td>
+																						<td>460</td>
+																						<td>3</td>
+																						<td>6</td>
+																						<td><div class='linker_sequence_column'>AFDDAK</div></td>
+																						<td><a href='pdb_extracted_linkers/1IQ8A-linker3.pdb'>Download</a></td>
+																						<td><input type="button" class="minimalstylebutton" style="display:none;" name="1IQ8A-3_button" id="1IQ8A-3_button" value="View" onclick="showJmolBox('1IQ8A-3','pdb_extracted_linkers/1IQ8A-linker3.pdb')"></td>
+																					</tr>
+																					<tr>
+																						<td>1IQPA</td>
+																						<td><div class='protein_name_column'>RFCS</div></td>
+																						<td>216</td>
+																						<td>221</td>
+																						<td>5</td>
+																						<td>6</td>
+																						<td><div class='linker_sequence_column'>AALDKK</div></td>
+																						<td><a href='pdb_extracted_linkers/1IQPA-linker5.pdb'>Download</a></td>
+																						<td><input type="button" class="minimalstylebutton" style="display:none;" name="1IQPA-5_button" id="1IQPA-5_button" value="View" onclick="showJmolBox('1IQPA-5','pdb_extracted_linkers/1IQPA-linker5.pdb')"></td>
+																					</tr>
+																					<tr>
+																						<td>1KQFA</td>
+																						<td><div class='protein_name_column'>FORMATE DEHYDROGENASE, NITRATE-INDUCIBLE, MAJOR SUBUNIT</div></td>
+																						<td>516</td>
+																						<td>519</td>
+																						<td>10</td>
+																						<td>4</td>
+																						<td><div class='linker_sequence_column'>AAQK</div></td>
+																						<td><a href='pdb_extracted_linkers/1KQFA-linker10.pdb'>Download</a></td>
+																						<td><input type="button" class="minimalstylebutton" style="display:none;" name="1KQFA-10_button" id="1KQFA-10_button" value="View" onclick="showJmolBox('1KQFA-10','pdb_extracted_linkers/1KQFA-linker10.pdb')"></td>
+																					</tr>
+																				</tbody>
+																			</table>	
+<script type="text/javascript">
+	<!--
+	//NOTE: TableSorter MUST be run immediately after the table is ready, BEFORE we import JSMol (not initialize, merely import). For some reason, TableSorter no longer works after JSMol is imported. 
+	$("#linker_search_result_table").tablesorter(); 
+	var inputs = document.getElementsByTagName("input");	//or document.forms[0].elements;  
+	for (var i = 0; i < inputs.length; i++) {				//Go through inputs
+		if (inputs[i].type == "button") {					//If they are buttons
+			inputs[i].style.display = '';					//Unhide them
+		}
+	}
+	//-->
+</script>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- Bottom Border -->
+															<div class="x-panel-bl">
+																<div class="x-panel-br">
+																	<div class="x-panel-bc">
+																		<div class="x-panel-footer x-panel-btns" style="width:978px;">
+																			<div class="x-clear" ></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Second Simple Header + Section Example -->
+						<div class=" x-panel" style="width: 1000px; ">
+							<div class="x-panel-tl">
+								<div class="x-panel-tr">
+									<div class="x-panel-tc">
+										<div class="x-panel-header x-unselectable">
+											<span class="x-panel-header-text">Section Below has "Softer" Borders, but no bottom border</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="x-panel-bwrap">
+								<div class="x-panel-ml">
+									<div class="x-panel-mr">
+										<div class="x-panel-mc">
+											<div class="x-panel-body" style="padding: 10px;">
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog.
+												
+												<br/><br/>
+												<p style="font-size:120%">Sample Title</p>
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog. 
+												The Quick Brown Fox Jumped over the lazy dog.
+												<br/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- This Div Holds the Main Glycan App Tab -->
+						<div class=" x-tab-panel" style="width: 1000px; ">
+							<div class="x-tab-panel-bwrap">
+								<!-- Central Content -->
+								<div class="x-tab-panel-body x-tab-panel-body-top" style="width: 998px;">
+									<div class=" x-panel x-panel-noborder" style="width: 998px; ">
+										<div class="x-panel-bwrap">
+											<div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" style="width: 998px; height: 1095px; ">
+												<div id="main" style="margin-left:auto;margin-right:auto;width:1000px">
+													<div id="inputForm" class=" x-panel" style="width: 1000px; ">
+														<!-- Title Bar -->
+														<div class="x-panel-tl">
+															<div class="x-panel-tr">
+																<div class="x-panel-tc">
+																	<div class="x-panel-header x-unselectable" id="ext-gen35">
+																		<span class="x-panel-header-text" id="ext-gen42">Demonstration of Fieldset display boxes</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														<!-- Content -->
+														<div class="x-panel-bwrap">
+															<div class="x-panel-ml">
+																<div class="x-panel-mr">
+																	<div class="x-panel-mc">
+																		<form class="x-panel-body x-form x-box-layout-ct" method="POST" id="ext-gen34" enctype="multipart/form-data" style="width: 988px; height: 382px; ">
+																			<div class="x-box-inner" style="width: 988px; height: 382px; ">
+																				<div id="ext-comp-1006" class=" x-panel x-box-item" style="width: 600px; left: 5px; top: 5px; ">
+																					<div class="x-panel-bwrap">
+																						<div class="x-panel-body x-panel-body-noheader x-box-layout-ct" style="width: 600px; height: 372px; ">
+																							<div class="x-box-inner" style="width: 600px; height: 372px; ">
+																								<fieldset id="ext-comp-1007" class=" x-fieldset x-form-label-left x-box-item" style="width: 568px; left: 5px; top: 5px; ">
+																									<legend class="x-fieldset-header x-unselectable" id="ext-gen56">
+																										<span class="x-fieldset-header-text" id="ext-gen59">Glycan String</span>
+																									</legend>
+																									<div class="x-fieldset-bwrap" id="ext-gen57">
+																										<div class="x-fieldset-body" id="ext-gen58" style="width: 568px; height: 179px; ">
+																											<div class="x-form-item " tabindex="-1" id="ext-gen71">
+																												<label for="ext-comp-1008" style="width:5px;" class="x-form-item-label" id="ext-gen72"></label>
+																												<div class="x-form-element" id="x-form-el-ext-comp-1008" style="padding-left:10px">
+																													<div class="x-form-check-wrap" id="ext-gen73">
+																														<input type="radio" autocomplete="off" id="ext-comp-1008" name="inputType" class=" x-form-radio x-form-field" value="string" checked="">
+																														<label for="ext-comp-1008" class="x-form-cb-label" id="ext-gen74">Glycan String</label>
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																											<div class="x-form-item " tabindex="-1" id="ext-gen75">
+																												<label for="glycanList" style="width:5px;" class="x-form-item-label" id="ext-gen76"></label>
+																												<div class="x-form-element" id="x-form-el-glycanList" style="padding-left:10px">
+																													<textarea style="width: 492px; height: 64px; " autocomplete="off" id="glycanList" name="glycanList" class=" x-form-textarea x-form-field"></textarea>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																											<div id="ext-comp-1009" class=" x-panel" style="width: 517px; ">
+																												<div class="x-panel-bwrap" id="ext-gen77">
+																													<div class="x-panel-body x-panel-body-noheader" id="ext-gen78" style="width: 517px; ">
+																													</div>
+																													<div class="x-panel-footer x-panel-btns" id="ext-gen79" style="width: 507px; ">
+																														<div id="ext-comp-1010" class="x-panel-fbar x-small-editor x-toolbar-layout-ct" style="width: auto; ">
+																															<table cellspacing="0" class="x-toolbar-ct">
+																																<tbody>
+																																	<tr>
+																																		<td class="x-toolbar-left" align="left">
+																																			<table cellspacing="0">
+																																				<tbody>
+																																					<tr class="x-toolbar-left-row"></tr>
+																																				</tbody>
+																																			</table>
+																																		</td>
+																																		<td class="x-toolbar-right" align="right">
+																																			<table cellspacing="0" class="x-toolbar-right-ct">
+																																				<tbody>
+																																					<tr>
+																																						<td>
+																																							<table cellspacing="0">
+																																								<tbody>
+																																									<tr class="x-toolbar-right-row">
+																																										<td class="x-toolbar-cell" id="ext-gen82">
+																																											<table id="glycanExample" cellspacing="0" class="x-btn  x-btn-noicon" style="width: auto; ">
+																																												<tbody class="x-btn-small x-btn-icon-small-left">
+																																													<tr>
+																																														<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																														<td class="x-btn-tc"></td>
+																																														<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																													</tr>
+																																													<tr>
+																																														<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																														<td class="x-btn-mc">
+																																															<em class="" unselectable="on">
+																																																<button type="button" id="ext-gen83" style="" class=" x-btn-text">Example in IUPAC format</button>
+																																															</em>
+																																														</td>
+																																														<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																													</tr>
+																																													<tr>
+																																														<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																														<td class="x-btn-bc"></td>
+																																														<td class="x-btn-br"><i>&nbsp;</i></td>
+																																													</tr>
+																																												</tbody>
+																																											</table>
+																																										</td>
+																																									</tr>
+																																								</tbody>
+																																							</table>
+																																						</td>
+																																						<td>
+																																							<table cellspacing="0">
+																																								<tbody>
+																																									<tr class="x-toolbar-extras-row"></tr>
+																																								</tbody>
+																																							</table>
+																																						</td>
+																																					</tr>
+																																				</tbody>
+																																			</table>
+																																		</td>
+																																	</tr>
+																																</tbody>
+																															</table>
+																														</div>
+																														<div class="x-clear" id="ext-gen81">
+																														</div>
+																													</div>
+																												</div>
+																											</div>
+																											<div class="x-form-item " tabindex="-1" id="ext-gen85">
+																												<label for="ext-comp-1011" style="width:5px;" class="x-form-item-label" id="ext-gen86"></label>
+																												<div class="x-form-element" id="x-form-el-ext-comp-1011" style="padding-left:10px">
+																													<div class="x-form-check-wrap" id="ext-gen87">
+																														<input type="radio" autocomplete="off" id="ext-comp-1011" name="inputType" class=" x-form-radio x-form-field" value="file">
+																														<label for="ext-comp-1011" class="x-form-cb-label" id="ext-gen88">Upload Input File</label>
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																											<div class="x-form-item " tabindex="-1" id="ext-gen89">
+																												<label for="glycanFile" style="width:5px;" class="x-form-item-label" id="ext-gen90"></label>
+																												<div class="x-form-element" id="x-form-el-glycanFile" style="padding-left:10px">
+																													<div class="x-form-field-wrap x-form-file-wrap" id="ext-gen91" style="width: 500px; ">
+																														<input type="text" size="20" autocomplete="off" id="glycanFile" class=" x-form-text x-form-field x-form-file-text x-item-disabled" readonly="" style="width: 444px; " disabled="">
+																														<input id="glycanFile-file" name="glycanFile" class="x-form-file" type="file" size="1" disabled="">
+																														<table id="ext-comp-1022" cellspacing="0" class="x-btn x-form-file-btn x-btn-noicon x-item-disabled" style="width: auto; ">
+																															<tbody class="x-btn-small x-btn-icon-small-left">
+																																<tr>
+																																	<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																	<td class="x-btn-tc"></td>
+																																	<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																</tr>
+																																<tr>
+																																	<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																	<td class="x-btn-mc">
+																																		<em class="" unselectable="on">
+																																			<button type="button" id="ext-gen92" style="" class=" x-btn-text">Browse</button>
+																																		</em>
+																																	</td>
+																																	<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																</tr>
+																																<tr>
+																																	<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																	<td class="x-btn-bc"></td>
+																																	<td class="x-btn-br"><i>&nbsp;</i></td>
+																																</tr>
+																															</tbody>
+																														</table>
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																										</div>
+																									</div>
+																								</fieldset>
+																								
+																								<fieldset id="ext-comp-1012" class=" x-fieldset x-form-label-left x-box-item" style="width: 568px; left: 5px; top: 220px; ">
+																									<legend class="x-fieldset-header x-unselectable" id="ext-gen61">
+																										<span class="x-fieldset-header-text" id="ext-gen64">Other options</span>
+																									</legend>
+																									<div class="x-fieldset-bwrap" id="ext-gen62">
+																										<div class="x-fieldset-body" id="ext-gen63" style="height: 44px; width: 568px; ">
+																											<div class="x-form-item " tabindex="-1" id="ext-gen93">
+																												<label for="ext-comp-1013" style="width:100px;" class="x-form-item-label" id="ext-gen94">Format:</label>
+																												<div class="x-form-element" id="x-form-el-ext-comp-1013" style="padding-left:105px">
+																													<div id="ext-comp-1013" class=" x-form-radio-group x-column-layout-ct x-form-field" style="width: 463px; ">
+																														<div class="x-column-inner" id="ext-gen96" style="width: 463px; ">
+																															<div id="ext-comp-1024" class=" x-column" style="width: 154px; ">
+																																<div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen101">
+																																	<label for="ext-comp-1025" style="width:100px;" class="x-form-item-label" id="ext-gen102"></label>
+																																	<div class="x-form-element" id="x-form-el-ext-comp-1025" style="padding-left:105px">
+																																		<div class="x-form-check-wrap" id="ext-gen103" style="width: 154px; ">
+																																			<input type="radio" autocomplete="off" id="ext-comp-1025" name="format" class=" x-form-radio x-form-field" value="modIUPAC" checked="">
+																																			<label for="ext-comp-1025" class="x-form-cb-label" id="ext-gen104">Modified IUPAC [<a href="http://bioinfo1.bti.a-star.edu.sg/app/glycan/index.php/site/help#iupac" target="_blank">?</a>] </label>
+																																		</div>
+																																	</div>
+																																	<div class="x-form-clear-left"></div>
+																																</div>
+																															</div>
+																															<div id="ext-comp-1026" class=" x-column" style="width: 154px; ">
+																																<div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen105">
+																																	<label for="ext-comp-1027" style="width:100px;" class="x-form-item-label" id="ext-gen106"></label>
+																																	<div class="x-form-element" id="x-form-el-ext-comp-1027" style="padding-left:105px">
+																																		<div class="x-form-check-wrap" id="ext-gen107" style="width: 154px; ">
+																																			<input type="radio" autocomplete="off" id="ext-comp-1027" name="format" class=" x-form-radio x-form-field" value="glycodigit">
+																																			<label for="ext-comp-1027" class="x-form-cb-label" id="ext-gen108">Glycodigit [<a href="http://bioinfo1.bti.a-star.edu.sg/app/glycan/index.php/site/help#glycodigit" target="_blank">?</a>]</label>
+																																		</div>
+																																	</div>
+																																	<div class="x-form-clear-left"></div>
+																																</div>
+																															</div>
+																															<div id="ext-comp-1028" class=" x-column" style="width: 154px; ">
+																																<div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen109">
+																																	<label for="ext-comp-1029" style="width:100px;" class="x-form-item-label" id="ext-gen110"></label>
+																																	<div class="x-form-element" id="x-form-el-ext-comp-1029" style="padding-left:105px">
+																																		<div class="x-form-check-wrap" id="ext-gen111" style="width: 154px; ">
+																																			<input type="radio" autocomplete="off" id="ext-comp-1029" name="format" class=" x-form-radio x-form-field" value="SMILES">
+																																			<label for="ext-comp-1029" class="x-form-cb-label" id="ext-gen112">SMILES [<a href="http://bioinfo1.bti.a-star.edu.sg/app/glycan/index.php/site/help#smiles" target="_blank">?</a>] </label>
+																																		</div>
+																																	</div>
+																																	<div class="x-form-clear-left"></div>
+																																</div>
+																															</div>
+																															<div class="x-clear" id="ext-gen97"></div>
+																														</div>
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																											<div class="x-form-item " tabindex="-1" id="ext-gen113">
+																												<label for="ext-comp-1014" style="width:100px;" class="x-form-item-label" id="ext-gen114">
+																													Minimize [<a href="http://bioinfo1.bti.a-star.edu.sg/app/glycan/index.php/site/help#minimization" target="_blank">?</a>]:
+																												</label>
+																												<div class="x-form-element" id="x-form-el-ext-comp-1014" style="padding-left:105px">
+																													<div id="ext-comp-1014" class=" x-form-radio-group x-column-layout-ct x-form-field" style="width: 130px; ">
+																														<div class="x-column-inner" id="ext-gen116" style="width: 130px; ">
+																															<div id="ext-comp-1031" class=" x-column" style="width: 65px; ">
+																																<div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen120">
+																																	<label for="ext-comp-1032" style="width:100px;" class="x-form-item-label" id="ext-gen121"></label>
+																																	<div class="x-form-element" id="x-form-el-ext-comp-1032" style="padding-left:105px">
+																																		<div class="x-form-check-wrap" id="ext-gen122" style="width: 65px; ">
+																																			<input type="radio" autocomplete="off" id="ext-comp-1032" name="minimize" class=" x-form-radio x-form-field" value="true" checked="">
+																																			<label for="ext-comp-1032" class="x-form-cb-label" id="ext-gen123">Yes</label>
+																																		</div>
+																																	</div>
+																																	<div class="x-form-clear-left"></div>
+																																</div>
+																															</div>
+																															<div id="ext-comp-1033" class=" x-column" style="width: 65px; ">
+																																<div class="x-form-item  x-hide-label" tabindex="-1" id="ext-gen124">
+																																	<label for="ext-comp-1034" style="width:100px;" class="x-form-item-label" id="ext-gen125"></label>
+																																	<div class="x-form-element" id="x-form-el-ext-comp-1034" style="padding-left:105px">
+																																		<div class="x-form-check-wrap" id="ext-gen126" style="width: 65px; ">
+																																			<input type="radio" autocomplete="off" id="ext-comp-1034" name="minimize" class=" x-form-radio x-form-field" value="false">
+																																			<label for="ext-comp-1034" class="x-form-cb-label" id="ext-gen127">No</label>
+																																		</div>
+																																	</div>
+																																	<div class="x-form-clear-left"></div>
+																																</div>
+																															</div>
+																															<div class="x-clear" id="ext-gen117"></div>
+																														</div>
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																										</div>
+																									</div>
+																								</fieldset>
+																								
+																								<fieldset id="ext-comp-1015" class=" x-fieldset x-form-label-left x-box-item" style="width: 568px; left: 5px; top: 300px; ">
+																									<legend class="x-fieldset-header x-unselectable" id="ext-gen66">
+																										<span class="x-fieldset-header-text" id="ext-gen69">Key in your email address if you wish to receive notification upon completion</span>
+																									</legend>
+																									<div class="x-fieldset-bwrap" id="ext-gen67">
+																										<div class="x-fieldset-body" id="ext-gen68" style="width: 568px; height: 23px; ">
+																											<div class="x-form-item " tabindex="-1" id="ext-gen128">
+																												<label for="email" style="width:120px;" class="x-form-item-label" id="ext-gen129">Your email address:</label>
+																												<div class="x-form-element" id="x-form-el-email" style="padding-left:125px">
+																													<input type="text" size="20" autocomplete="off" id="email" name="email" class=" x-form-text x-form-field" style="width: 267px; ">
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																										</div>
+																									</div>
+																								</fieldset>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																		
+																				<div id="ext-comp-1016" class=" x-panel x-box-item" style="width: 378px; left: 605px; top: 5px; ">
+																					<div class="x-panel-bwrap" id="ext-gen52">
+																						<div class="x-panel-body x-panel-body-noheader x-box-layout-ct" id="ext-gen53" style="width: 378px; height: 372px; ">
+																							<div class="x-box-inner" id="ext-gen130" style="width: 378px; height: 372px; ">
+																								<fieldset id="ext-comp-1017" class=" x-fieldset x-form-label-left x-box-item" style="width: 346px; left: 5px; top: 5px; ">
+																									<legend class="x-fieldset-header x-unselectable" id="ext-gen131">
+																										<span class="x-fieldset-header-text" id="ext-gen134">Information</span>
+																									</legend>
+																									<div class="x-fieldset-bwrap" id="ext-gen132">
+																										<div class="x-fieldset-body" id="ext-gen133" style="width: 346px; height: 318px; ">
+																											<div class="x-form-item " tabindex="-1" id="ext-gen136">
+																												<label for="ext-comp-1018" style="width:5px;" class="x-form-item-label" id="ext-gen137"></label>
+																												<div class="x-form-element" id="x-form-el-ext-comp-1018" style="padding-left:10px">
+																													<div id="ext-comp-1018" name="ext-comp-1018" class=" x-form-display-field" style="height: 315px; ">
+																														Enter in a list of glycan strings in either <b>Modified Condensed IUPAC</b>, <b>Glycodigit</b> or <b>SMILES</b> format and submit them for batch conversion into their corresponding molecular models.<br><br>
+																														Select <b>Minimize</b> to optimize the structures of glycans.(Warning: Minimization may increase the time required for model generation) <br><br>
+																														You can take down the result ID after conversion and use it to retrieve your data again. Note that data will be automatically deleted after one month.<br><br>
+																														You can also get notification upon completion by providing your email address.
+																													</div>
+																												</div>
+																												<div class="x-form-clear-left"></div>
+																											</div>
+																										</div>
+																									</div>
+																								</fieldset>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+															</div>
+															<div class="x-panel-bl" id="ext-gen38">
+																<div class="x-panel-br">
+																	<div class="x-panel-bc">
+																		<div class="x-panel-footer x-panel-btns" id="ext-gen37" style="width: 978px; ">
+																			<div id="ext-comp-1019" class="x-panel-fbar x-small-editor x-toolbar-layout-ct" style="width: auto; ">
+																				<table cellspacing="0" class="x-toolbar-ct">
+																					<tbody>
+																						<tr>
+																							<td class="x-toolbar-left" align="left">
+																								<table cellspacing="0">
+																									<tbody>
+																										<tr class="x-toolbar-left-row"></tr>
+																									</tbody>
+																								</table>
+																							</td>
+																							<td class="x-toolbar-right" align="right">
+																								<table cellspacing="0" class="x-toolbar-right-ct">
+																									<tbody>
+																										<tr>
+																											<td>
+																												<table cellspacing="0">
+																													<tbody>
+																														<tr class="x-toolbar-right-row">
+																															<td class="x-toolbar-cell" id="ext-gen43">
+																																<table id="ext-comp-1020" cellspacing="0" class="x-btn  x-btn-noicon" style="width: 75px; ">
+																																	<tbody class="x-btn-small x-btn-icon-small-left">
+																																		<tr>
+																																			<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																			<td class="x-btn-tc"></td>
+																																			<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																		</tr>
+																																		<tr>
+																																			<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																			<td class="x-btn-mc">
+																																				<em class="" unselectable="on">
+																																					<button type="button" id="ext-gen44" style="" class=" x-btn-text">Submit</button>
+																																				</em>
+																																			</td>
+																																			<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																		</tr>
+																																		<tr>
+																																			<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																			<td class="x-btn-bc"></td>
+																																			<td class="x-btn-br"><i>&nbsp;</i></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																															</td>
+																															<td class="x-toolbar-cell" id="ext-gen45">
+																																<table id="ext-comp-1021" cellspacing="0" class="x-btn  x-btn-noicon" style="width: 75px; ">
+																																	<tbody class="x-btn-small x-btn-icon-small-left">
+																																		<tr>
+																																			<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																			<td class="x-btn-tc"></td>
+																																			<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																		</tr>
+																																		<tr>
+																																			<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																			<td class="x-btn-mc">
+																																				<em class="" unselectable="on">
+																																					<button type="button" id="ext-gen46" style="" class=" x-btn-text">Clear</button>
+																																				</em>
+																																			</td>
+																																			<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																		</tr>
+																																		<tr>
+																																			<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																			<td class="x-btn-bc"></td>
+																																			<td class="x-btn-br"><i>&nbsp;</i></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																															</td>
+																														</tr>
+																													</tbody>
+																												</table>
+																											</td>
+																											<td>
+																												<table cellspacing="0">
+																													<tbody>
+																														<tr class="x-toolbar-extras-row"></tr>
+																													</tbody>
+																												</table>
+																											</td>
+																										</tr>
+																									</tbody>
+																								</table>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</div>
+																			<div class="x-clear" id="ext-gen41"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+										
+												<!-- Results Section -->
+												<div id="result" style="margin-left:auto;margin-right:auto;width:1000px;height:700px">
+													<div id="resultPanel" class=" x-panel" style="width: 1000px; ">
+														<!-- Title Bar -->
+														<div class="x-panel-tl">
+															<div class="x-panel-tr">
+																<div class="x-panel-tc">
+																	<div class="x-panel-header x-unselectable" id="ext-gen140">
+																		<span class="x-panel-header-text" id="ext-gen145">Result</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														<!-- Content -->
+														<div class="x-panel-bwrap" id="ext-gen141">
+															<div class="x-panel-ml">
+																<div class="x-panel-mr">
+																	<div class="x-panel-mc" id="ext-gen144">
+																		<div class="x-panel-body" id="ext-gen142" style="width: 988px; height: 665px; ">
+																		
+																			<!-- Results Form Start -->
+																			<div id="ext-comp-1036" class=" x-panel x-form-label-left">
+																				<div class="x-panel-bwrap" id="ext-gen146">
+																					<form class="x-panel-body x-panel-body-noheader x-form" method="POST" id="ext-gen139" style="height: 22px; ">
+																						<div class="x-form-item " tabindex="-1" id="ext-gen157">
+																							<label for="id" style="width:100px;" class="x-form-item-label" id="ext-gen158">Result ID:</label>
+																							<div class="x-form-element" id="x-form-el-id" style="padding-left:105px">
+																								<input type="text" size="20" autocomplete="off" id="id" name="id" class=" x-form-text x-form-field">
+																							</div>
+																							<div class="x-form-clear-left"></div>
+																						</div>
+																						<div class="x-form-item  x-hide-display" tabindex="-1" id="ext-gen159">
+																							<label for="hid" style="width:100px;" class="x-form-item-label" id="ext-gen160">Hidden ID:</label>
+																							<div class="x-form-element" id="x-form-el-hid" style="padding-left:105px">
+																								<input type="text" size="20" autocomplete="off" id="hid" name="hid" class=" x-form-text x-form-field x-hide-display">
+																							</div>
+																							<div class="x-form-clear-left"></div>
+																						</div>
+																					</form>
+																					<div class="x-panel-footer x-panel-btns" id="ext-gen147" style="width: 978px; ">
+																						<div id="ext-comp-1037" class="x-panel-fbar x-small-editor x-toolbar-layout-ct" style="width: auto; ">
+																							<table cellspacing="0" class="x-toolbar-ct">
+																								<tbody>
+																									<tr>
+																										<td class="x-toolbar-left" align="left">
+																											<table cellspacing="0">
+																												<tbody>
+																													<tr class="x-toolbar-left-row"></tr>
+																												</tbody>
+																											</table>
+																										</td>
+																										<td class="x-toolbar-right" align="right">
+																											<table cellspacing="0" class="x-toolbar-right-ct">
+																												<tbody>
+																													<tr>
+																														<td>
+																															<table cellspacing="0">
+																																<tbody>
+																																	<tr class="x-toolbar-right-row">
+																																		<td class="x-toolbar-cell" id="ext-gen150">
+																																			<table id="ext-comp-1038" cellspacing="0" class="x-btn  x-btn-noicon" style="width: 75px; ">
+																																				<tbody class="x-btn-small x-btn-icon-small-left">
+																																					<tr>
+																																						<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-tc"></td>
+																																						<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																						<td class="x-btn-mc">
+																																							<em class="" unselectable="on">
+																																								<button type="button" id="ext-gen151" style="" class=" x-btn-text">Retrieve</button>
+																																							</em>
+																																						</td>
+																																						<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-bc"></td>
+																																						<td class="x-btn-br"><i>&nbsp;</i></td>
+																																					</tr>
+																																				</tbody>
+																																			</table>
+																																		</td>
+																																		<td class="x-toolbar-cell" id="ext-gen152">
+																																			<table id="downloadbutton" cellspacing="0" class="x-btn  x-btn-noicon x-item-disabled" style="width: 75px; ">
+																																				<tbody class="x-btn-small x-btn-icon-small-left">
+																																					<tr>
+																																						<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-tc"></td>
+																																						<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																						<td class="x-btn-mc">
+																																							<em class="" unselectable="on">
+																																								<button type="button" id="ext-gen153" style="" class=" x-btn-text">Download All</button>
+																																							</em>
+																																						</td>
+																																						<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-bc"></td>
+																																						<td class="x-btn-br"><i>&nbsp;</i></td>
+																																					</tr>
+																																				</tbody>
+																																			</table>
+																																		</td>
+																																		<td class="x-toolbar-cell" id="ext-gen154">
+																																			<table id="clearbutton" cellspacing="0" class="x-btn  x-btn-noicon" style="width: 75px; ">
+																																				<tbody class="x-btn-small x-btn-icon-small-left">
+																																					<tr>
+																																						<td class="x-btn-tl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-tc"></td>
+																																						<td class="x-btn-tr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-ml"><i>&nbsp;</i></td>
+																																						<td class="x-btn-mc">
+																																							<em class="" unselectable="on">
+																																								<button type="button" id="ext-gen155" style="" class=" x-btn-text">Clear Results</button>
+																																							</em>
+																																						</td>
+																																						<td class="x-btn-mr"><i>&nbsp;</i></td>
+																																					</tr>
+																																					<tr>
+																																						<td class="x-btn-bl"><i>&nbsp;</i></td>
+																																						<td class="x-btn-bc"></td>
+																																						<td class="x-btn-br"><i>&nbsp;</i></td>
+																																					</tr>
+																																				</tbody>
+																																			</table>
+																																		</td>
+																																	</tr>
+																																</tbody>
+																															</table>
+																														</td>
+																														<td>
+																															<table cellspacing="0">
+																																<tbody>
+																																	<tr class="x-toolbar-extras-row"></tr>
+																																</tbody>
+																															</table>
+																														</td>
+																													</tr>
+																												</tbody>
+																											</table>
+																										</td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</div>
+																						<div class="x-clear" id="ext-gen149"></div>
+																					</div>
+																				</div>
+																			</div>
+																			<!-- Results Form End -->
+																			
+																			<!-- Table Start -->
+																			<div id="ext-comp-1039" class=" x-panel x-grid-panel">
+																				<div class="x-panel-bwrap" id="ext-gen161">
+																					<div class="x-panel-body x-panel-body-noheader" id="ext-gen162" style="height: 600px; ">
+																						<div class="x-grid3" hidefocus="true" id="ext-gen164" style="width: 988px; height: 600px; ">
+																							<div class="x-grid3-viewport" id="ext-gen165">
+																								<div class="x-grid3-header" id="ext-gen166">
+																									<div class="x-grid3-header-inner" id="ext-gen168" style="width: 988px; ">
+																										<div class="x-grid3-header-offset" style="width:989px;">
+																											<table border="0" cellspacing="0" cellpadding="0" style="width: 970px;">
+																												<thead>
+																													<tr class="x-grid3-hd-row">
+																														<td class="x-grid3-hd x-grid3-cell x-grid3-td-0 x-grid3-cell-first " style="width: 30px;">
+																															<div class="x-grid3-hd-inner x-grid3-hd-0" unselectable="on" style="">
+																																<a class="x-grid3-hd-btn" href="#"></a>S/N
+																																<img alt="" class="x-grid3-sort-icon" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+																															</div>
+																														</td>
+																														<td class="x-grid3-hd x-grid3-cell x-grid3-td-1 " style="width: 200px;">
+																															<div class="x-grid3-hd-inner x-grid3-hd-1" unselectable="on" style="">
+																																<a class="x-grid3-hd-btn" href="#"></a>Thumbnail
+																																<img alt="" class="x-grid3-sort-icon" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+																															</div>
+																														</td>
+																														<td class="x-grid3-hd x-grid3-cell x-grid3-td-2 " style="width: 480px;">
+																															<div class="x-grid3-hd-inner x-grid3-hd-2" unselectable="on" style="">
+																																<a class="x-grid3-hd-btn" href="#"></a>Glycan/SMILES String
+																																<img alt="" class="x-grid3-sort-icon" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+																															</div>
+																														</td>
+																														<td class="x-grid3-hd x-grid3-cell x-grid3-td-3 " style="width: 100px;">
+																															<div class="x-grid3-hd-inner x-grid3-hd-3" unselectable="on" style="">
+																																<a class="x-grid3-hd-btn" href="#"></a>Download Link
+																																<img alt="" class="x-grid3-sort-icon" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+																															</div>
+																														</td>
+																														<td class="x-grid3-hd x-grid3-cell x-grid3-td-4 x-grid3-cell-last " style="width: 160px;">
+																															<div class="x-grid3-hd-inner x-grid3-hd-4" unselectable="on" style="">
+																																<a class="x-grid3-hd-btn" href="#"></a>Online 3D viewer
+																																<img alt="" class="x-grid3-sort-icon" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+																															</div>
+																														</td>
+																													</tr>
+																												</thead>
+																											</table>
+																										</div>
+																									</div>
+																									<div class="x-clear"></div>
+																								</div>
+																								<div class="x-grid3-scroller" id="ext-gen167" style="width: 988px; height: 577px; ">
+																									<div class="x-grid3-body" style="width:970px;" id="ext-gen169">
+																										&nbsp;
+																									</div>
+																									<a href="#" class="x-grid3-focus" tabindex="-1" id="ext-gen170"></a>
+																								</div>
+																							</div>
+																							<div class="x-grid3-resize-marker" id="ext-gen171">&nbsp;</div>
+																							<div class="x-grid3-resize-proxy" id="ext-gen172">&nbsp;</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<!-- Table End -->
+																			
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="x-panel-bl x-panel-nofooter" id="ext-gen143">
+																<div class="x-panel-br">
+																	<div class="x-panel-bc"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>	
+				</tr>
+				<tr><!-- 3rd row: Footer -->
+					<td>
+						<!-- Footer (Formatting based on help bar)-->
+						<div class="x-tab-panel-tbar" style="width: 1000px;">
+							<div class="x-toolbar x-small-editor x-toolbar-layout-ct" style="padding:10px; width:998px; text-align:center; font: normal 13px tahoma,arial,helvetica,sans-serif;">
+								&copy; 2012-2013 <a href="http://www.bti.a-star.edu.sg/Website/">Bioprocessing Technology Institute (BTI)</a>. All Rights Reserved. 
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id='jsmol_holder_div' style='display: none;'>
+		<div class=" x-tab-panel" style="width: 500px; box-shadow: 0px 5px 10px 5px #666666; margin-left:auto; margin-right:auto;">				
+			<!-- Central Content -->
+			<div class="x-tab-panel-bwrap" style="text-align:left;">
+				<div class="x-tab-panel-body x-tab-panel-body-top" style="width: 498px;">
+					<div class=" x-panel x-panel-noborder" style="width: 498px; ">
+						<div class="x-panel-bwrap">
+							<div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" style="width: 498px;">
+								<div style="margin-left:auto;margin-right:auto; width:500px">
+									<div class=" x-panel" style="width: 500px; ">
+										<!-- Title Bar -->
+										<div class="x-panel-tl">
+											<div class="x-panel-tr">
+												<div class="x-panel-tc">
+													<div class="x-panel-header x-unselectable">
+														<div class="x-panel-header-text">
+															<table style="width:100%;">
+																<tr>
+																	<td>
+																		<div id="jsmol_title" style="font: bold 13px tahoma,arial,verdana,sans-serif;">Linker Title</div>
+																	</td>
+																	<td class="right">
+																		<input type="button" name="hide_jsmol_holder_div_button" id="hide_jsmol_holder_div_button" value=" X " onclick="document.getElementById('jsmol_holder_div').style.display='none'" />
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<!-- Content -->
+										<div class="x-panel-bwrap">
+											<div class="x-panel-ml">
+												<div class="x-panel-mr">
+													<div class="x-panel-mc">
+														<div class="x-box-inner" style="width: 488px; background-color:black;">
+															<script type="text/javascript" src="javascript/jsmol/JSmol.min.js"></script>
+															<script type="text/javascript" src="javascript/jsmol/Jmol2.js"></script>
+															<script type="text/javascript">
+																function showJmolBox(DisplayName,TargetFilePath) {
+																	document.getElementById("jsmol_holder_div").style.display='';			//Show the Div
+																	document.getElementById("jsmol_title").innerHTML = DisplayName;			//Show Display name
+																	document.getElementById("jmolCmd0").value = "load " + TargetFilePath;	//input console
+																	Jmol.controls._commandKeyPress(13,'jmolCmd0','jmolApplet0');			//activate console
+																}	
+
+																<!--
+																//If JavaScript not working, hide the code in HTML comments
+																//Initiate JSMol
+																//==============
+																
+																// 1/21/2013 10:54:15 PM -- adds image handling
+																var jmolApplet0; // set up in HTML table, below
+																// logic is set by indicating order of USE -- default is HTML5 for this test page, though
+																var use = "HTML5" // JAVA HTML5 WEBGL IMAGE  are all otions
+																var s = document.location.search;
+																// Developers: The debugCode flag is checked in j2s/core/core.z.js, 
+																// and, if TRUE, skips loading the core methods, forcing those
+																// to be read from their individual directories. Set this
+																// true if you want to do some code debugging by inserting
+																// System.out.println, document.title, or alert commands
+																// anywhere in the Java or Jmol code.
+																Jmol.debugCode = (s.indexOf("debugcode") >= 0);
+
+																jmol_isReady = function(applet) {
+																	Jmol._getElement(applet, "appletdiv").style.border="1px solid black"
+																}		
+
+																//Initial Settings and Displayed Protein/Source URL
+																script = ''						//Generate Script String
+																+'h2oOn=true; '
+																+'default_load_color_type="cpk"; '
+																+'default_load_shape_type="spacefill"; '
+																+'default_load_graph_type="model"; '
+																+'set antialiasDisplay; '		//Makes model look smoother at cost of speed
+																+'set animframecallback "jmolscript:if (!selectionHalos) {select model=_modelNumber}";'
+																+'set errorCallback "myCallback";'
+																+'set defaultloadscript "'		//Change Default Load Scripts (nested in double quotes)
+																	+'isDssp=false; '
+																	+'set defaultVDW babel; '
+																	+'if(!h2oOn){display !water}; '
+																	+'if(default_load_color_type=\'cpk\'){color cpk}; '
+																	+'if(default_load_color_type=\'group\'){color group}; '			
+																	+'if(default_load_color_type=\'structure\'){color structure}; '
+																	+'if(default_load_color_type=\'amino\'){color amino}; '
+																	+'if(default_load_color_type=\'shapely\'){color shapely}; '
+																	+'if(default_load_color_type=\'chain\'){color chain}; '
+																	+'if(default_load_color_type=\'formalcharge\'){color formalcharge}; '
+																	+'if(default_load_shape_type=\'spacefill\'){spacefill only;spacefill 23%;wireframe 0.15}; '			
+																	+'if(default_load_shape_type=\'cartoon\'){cartoon only}; '
+																	+'if(default_load_shape_type=\'trace\'){trace only}; '
+																	+'if(default_load_shape_type=\'backbone\'){backbone only}; '
+																	+'if(default_load_graph_type=\'model\'){model}; '
+																	+'if(default_load_graph_type=\'Ramachandran relative\'){Ramachandran relative}; '
+																	+'if(default_load_graph_type=\'Quaternion difference\'){Quaternion difference};'
+																+' ";'							//End of double quote nesting
+																+'set zoomlarge true; '
+																+'set echo top left; '
+																+'echo Loading Linker...; '
+																+'refresh; '
+																//+'frame all; '
+																//+'set appendNew false; load append "pdb/empty.pdb"; set appendNew true;'
+																//+'set echo top center;'		//Set position of displayed messages
+																//+'echo XXXX;'					//Display Protein ID
+																//+'spacefill off; '			//Turnoff spacefill atoms (off since spacefill is default)
+																//+'wireframe off; '			//Turnoff spacefill bonds (off since spacefill is default)
+																+'zoom 70; '
+																
+																//Populate INFO
+																var Info = {
+																	width: 486,
+																	height: 301,
+																	debug: false,
+																	color: "black",			//Bacground colour
+																	addSelectionOptions: false,
+																	//serverURL: "http://chemapps.stolaf.edu/jmol/jsmol/jsmol.php",
+																	use: "HTML5",
+																	readyFunction: jmol_isReady,
+																	script: script,			//Put Script Variable above into script here
+																	j2sPath: "javascript/jsmol/j2s",
+																	jarPath: "javascript/jsmol/java",			
+																	//jarFile: (useSignedApplet ? "JmolAppletSigned.jar" : "JmolApplet.jar"),
+																	//isSigned: useSignedApplet,
+																	//disableJ2SLoadMonitor: true,
+																	disableInitialConsole: true		//Preload Messages
+																	//defaultModel: "$dopamine",
+																	//console: "none", // default will be jmolApplet0_infodiv
+																}
+
+																// these are conveniences that mimic behavior of Jmol.js
+																function jmolCheckbox(script1, script0,text,ischecked) {Jmol.jmolCheckbox(jmolApplet0,script1, script0, text, ischecked)}
+																
+																function jmolButton(script, text) {
+																	//Jmol.jmolButton(JmolObject, script, label, id, title)
+																	Jmol.jmolButton(jmolApplet0, script, text)
+																}
+																function jmolMenu(a) {Jmol.jmolMenu(jmolApplet0, a)}		
+																function jmolHtml(s) { document.write(s) };		//Write Document
+																function jmolNbsp() { jmolHtml("&nbsp;") }		//Write Spacer
+																function jmolBr() { jmolHtml("<br />") }		//Write Line Break
+																
+																//This jMol is called jmolApplet0
+																//Must be initialized on top, so that view buttons later can access the initialized Applet
+																jmolInitialize(		//Note: For IE, changing jmolInitialize 
+																	"java"			//does not do anything. The Applet always 
+																);					//looks in '/java' folder
+																//Note that the variable name MUST match the first parameter in quotes
+																jmolApplet0 = Jmol.getApplet("jmolApplet0", Info);
+																//jmolApplet0.load();
+																-->
+															</script>
+															<script type="text/javascript">
+																<!--
+																//If JavaScript not working, hide the code in HTML comments
+																Jmol.setMenuCss(null,"style='width:130px'");	//Control Style here
+																jmolHtml("<table class='middle'><tr>");
+																jmolHtml("<td><b style='color: white;'>Visualization Options:</b></td>");
+																jmolHtml("<td>&nbsp;&nbsp;</td>");		//Spacer Cell				
+																
+																//jmolMenu(arrayOfMenuItems, menuHeight, id, title)
+																//For Script, note that 'select all;' is required to affect all frames at once
+																//Otherwise, it will affect NONE of the frames
+																//The Scripts below also change default_load_XXXX_type. This is used above to affect Load Type
+																jmolHtml("<td>");
+																Jmol.jmolMenu("jmolApplet0",
+																	[	//[Script , name , true_or_false (default false) ]
+																		//If you change these, remember to change the defaultloadscript colour types above as well
+																		["select all; color cpk; default_load_color_type='cpk'", "CPK Pattern", true],
+																		["select all; color group; default_load_color_type='group'", "Rainbow"],
+																		["select all; color structure; default_load_color_type='structure'", "Secondary Structure"],
+																		["select all; color amino; default_load_color_type='amino'", "Amino Pattern"],
+																		["select all; color shapely; default_load_color_type='shapely'", "Shapely Pattern"],
+																		["select all; color chain; default_load_color_type='chain'", "Chain"],
+																		["select all; color formalcharge; default_load_color_type='formalcharge'", "Electric Charge"]
+																	],
+																	0,
+																	"dropdown_colour"	//Use ID to find visual form when changing molecule
+																);
+																jmolHtml("</td>");
+																jmolHtml("<td>&nbsp;&nbsp;</td>");		//Spacer Cell	
+																jmolHtml("<td>");
+																Jmol.jmolMenu("jmolApplet0",
+																	[	//[Script , name , true_or_false (default false) ]
+																		//If you change these, remember to change the defaultloadscript shape types above as well
+																		["select all; spacefill only;spacefill 23%;wireframe 0.15; default_load_shape_type='spacefill'", "ball & stick", true],
+																		["select all; cartoon only; default_load_shape_type='cartoon'", "cartoon"],
+																		["select all; trace only; default_load_shape_type='trace'", "trace"],
+																		["select all; backbone only; default_load_shape_type='backbone'", "backbone"]
+																	],
+																	0,
+																	"dropdown_shape"	//Use ID to find visual form when changing molecule
+																);
+																jmolHtml("</td>");
+																jmolHtml("</tr>");
+																jmolHtml("</table>");
+																//jmolHtml("<tr><td>");
+																//jmolHtml("Water");
+																//jmolHtml("</td><td></td><td>");
+																//Jmol.jmolMenu("jmolApplet0",
+																//	[	//[Script , name , true_or_false (default false) ]
+																//		//If you change these, remember to change the defaultloadscript shape types above as well
+																//		["h2oOn=true;display *", "Show Water", true],
+																//		["h2oOn=false;display !water", "Hide Water"]
+																//	],
+																//	0,
+																//	"dropdown_water"	//Use ID to find visual form when changing molecule
+																//);						
+																//jmolCheckbox("h2oOn=true;display *","h2oOn=false;display !water","",true);
+																//jmolHtml("</td></tr>");
+																-->
+															</script>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Bottom Border -->
+											<div class="x-panel-bl">
+												<div class="x-panel-br">
+													<div class="x-panel-bc">
+														<div class="x-panel-footer x-panel-btns" style="width:978px;">
+															<div class="x-clear" ></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div style='display: none;'>	
+		<script type="text/javascript">
+			<!--
+			//Div with hidden Console that will not be displayed.
+			Jmol.jmolCommandInput(jmolApplet0)
+			-->
+		</script>
+	</div>
+</body>
+</html>

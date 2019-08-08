@@ -1,0 +1,85 @@
+/* Basic settings for this dropdown menu */
+#dropdown_menu  {
+	/* Use default font settings */
+	/* font-size: 15px; */
+}
+
+#dropdown_menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#dropdown_menu ul li {
+	display: block;
+	position: relative;
+	float: left;
+}
+
+/* This controls the appearance of each menu item */
+#dropdown_menu ul li a {
+	display: block;
+	padding: 3px 7px 3px 7px;
+	white-space: nowrap;	/* This prevents line breaks when there is a space */
+	text-decoration: none;
+	border-top: 1px solid white;
+	margin-left: 1px;
+	
+	background: rgb(217,235,255);
+	color: #000;
+	/*
+	background: #16416e;
+	color: #FFFFFF;
+	*/
+}
+
+/* This controls the main menu mouseover appearance */
+#dropdown_menu ul li a:hover {
+	background: rgb(0,61,124);
+	color: #FFFFFF;
+	/*
+	background: #99CCFF;
+	color: #000;
+	*/
+}
+
+/* Primary Drop Down Menu Controls:
+===================================
+*/
+
+/* Nested Lists are initially not displayed*/
+#dropdown_menu li ul {
+	display: none;
+}
+
+/* This causes the nested menu to appear when mouse over */
+#dropdown_menu li:hover ul {
+	display: block;
+	position: absolute;
+}
+
+/* Controls the appearance of the nested menu when it does appear*/
+#dropdown_menu li:hover li {
+	float: none;
+	/* Use default font settings */
+	/* font-size: 15px; */
+}
+
+/* This controls the drop-down menu initial appearance (NOT mouseover) and overrides the original menu item appearance */
+#dropdown_menu li:hover a {
+	background: rgb(217,235,255);
+	color: #000;
+	/*
+	background: #16416e;
+	color: #FFFFFF;
+	*/
+}
+
+/* This controls the drop-down menu mouseover appearance */
+#dropdown_menu li:hover li a:hover {
+	background: rgb(0,61,124);
+	color: #FFFFFF;
+	/*
+	background: #99CCFF;
+	color: #000;
+	*/
+}

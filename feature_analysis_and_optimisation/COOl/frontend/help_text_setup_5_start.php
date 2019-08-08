@@ -1,0 +1,3 @@
+<p>This is the last page for setting up a job. Optionally, you may enter your e-mail address, and this web tool will send you a notification e-mail, when your results are ready. Regardless of whether you enter an e-mail, when you are ready to continue, click "Save and Submit Job".</p>
+<br/>
+<p><b>Important:</b> Once a job has been submitted, you cannot make any other further changes to the input parameters. This page is hence the final confirmation before the algorithm starts running.</p>

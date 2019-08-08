@@ -1,0 +1,16 @@
+/******************* 
+ *** Main layout ***
+ *******************/
+
+.layout-left-shadow {
+	width: 10px;
+	background-image:url('images/shadow_left.png');
+	background-repeat:repeat-y;
+}
+
+.layout-right-shadow {
+	width: 10px;
+	background-image:url('images/shadow_right.png');
+	background-repeat:repeat-y;
+}
+

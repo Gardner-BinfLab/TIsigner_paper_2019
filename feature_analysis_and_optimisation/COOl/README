@@ -1,0 +1,27 @@
+The "codonopt-job_manager.pl" script should be run after setting up the MySQL database.
+
+The back-end "co_ubuntu.exe" algorithm can be run as an independent tool.
+"co_ubuntu.exe" is an executable binary compiled to run on a Linux x86 (64-bit) environment.
+It requires an input file named "X_param", where "X" is the serial number for a user's job on the database.
+"X_param" is a 2-column tab-delimited file containing the following parameters:
+- encryptID: Encrypted ID for the user job
+- aaSeq: Protein sequence to be optimized
+- flagHash: A semicolon-delimited list indicating the objectives to be optimized
+- gcTarget: The target GC content % value to achieve
+- exclSeqList: Sequences to be excluded for the optimization
+- repeatNum: Length and number of repeats to be avoided
+- c2aa: Codon to amino acid translation rule
+- aa2c: Amino acid to codon reverse translation rule
+- cPair2aaPair: Codon pair to amino acid pair translation rule
+- cCountRef: Codon counts of reference organism
+- aaCountRef: Amino acid counts of reference organism
+- cPairCountRef: Codon pair counts of reference organism
+- aaPairCountRef: Amino acid pair counts of reference organism
+- GArunParam: 
+- randSeed: 
+
+The output file "X_results" containing a list of optimized sequences and
+their respective fitness values in the order of IC, CC, CAI, Exclusion Sequence, 
+GC fitness, Hidden Stop Codons, Repeat Fitness will be generated.
+
+See "0000000077_param" and "0000000077_results" for example.

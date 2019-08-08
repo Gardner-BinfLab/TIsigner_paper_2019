@@ -1,0 +1,13 @@
+/* This CSS is used for the Show/Hide functionality. */
+.hidden_at_start {
+	display: none;
+}
+a.showLink, a.hideLink {
+	text-decoration: none;
+	color: blue;
+	/*color: #36f;*/
+}
+a.showLink:hover, a.hideLink:hover {
+	border-bottom: 1px dotted blue;
+	/*border-bottom: 1px dotted #36f;*/
+}

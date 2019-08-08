@@ -1,0 +1,126 @@
+/* tablesorter */
+
+/*Style for the whole table*/
+table.tablesorter {
+	/*
+	background-color: #CDCDCD;
+	width: 100%;
+	font-family:arial;
+	text-align: left;
+	*/	
+	/* Margin: Top / Left / Bottom*/ 
+	margin:0px 0px 0px;
+	border-collapse:seperate;
+	border-spacing:0px 0px;
+	font-size:11px;
+	text-align:left;
+}
+#nonsort_override_1, #nonsort_override_2, #nonsort_override_3, #nonsort_override_4, #nonsort_override_5 {
+	text-align: center;
+	padding-right:4px;					/* MNo need for space to display arrow */
+}
+/*Gradient background for overall head, for each row */
+table.tablesorter thead tr, #nonsort_override_1, #nonsort_override_2, #nonsort_override_3, #nonsort_override_4, #nonsort_override_5{
+	cursor: default;
+	color:black;
+	background-color: #e5e5e5;
+	background-image: url();
+	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#dddddd));
+	background: -moz-linear-gradient(top,  #eeeeee,  #dddddd);
+	/* IE style not working properly with nonsort_override */
+	/* filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dddddd'); */
+}
+/* Color for hovering on header cells for both sorted and unsorted headers*/
+table.tablesorter thead tr th.header:hover, table.tablesorter thead tr th.headerSortDown:hover, table.tablesorter thead tr th.headerSortUp:hover {
+	color:black;
+	background-color: white;
+}
+/*Headers and Footer: Individual cells*/
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	border-top: solid 1px #ffffff;		/* Each cell has psuedo-box border */
+	border-left: solid 1px #ffffff;	
+	border-bottom: solid 1px #cccccc;
+	border-right: solid 1px #cccccc;
+	text-align: inherit;
+	background-color: transparent;		/* Transparent background makes gradient visible */
+	padding-right:20px;					/* More Space for display of arrow */	
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:4px;
+}
+
+/*Headers Only (non-sorted columns) */
+table.tablesorter thead tr .header {
+	cursor: pointer;
+	background-image: url(images/tablesorter-bg-black.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+/* Colour for Header Column that is sorted */
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+	color:#dddddd;
+	background-color: #777777;
+	border-top: solid 1px #555555;	/* Each cell has border */
+	border-left: solid 1px #555555;	/* Each cell has border */
+	border-bottom: solid 1px #ffffff;	/* Each cell has border */
+	border-right: solid 1px #ffffff;	/* Each cell has border */	
+}
+/* Header Column that is sorted Ascending */
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(images/tablesorter-asc-white.gif);
+}
+table.tablesorter thead tr .headerSortUp:hover {
+	background-image: url(images/tablesorter-asc-black.gif);
+}
+/* Header Column that is sorted desscending */
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(images/tablesorter-desc-white.gif);
+}
+table.tablesorter thead tr .headerSortDown:hover {
+	background-image: url(images/tablesorter-desc-black.gif);
+}
+
+/* Style for the Table body */
+table.tablesorter tbody td, table.tablesorter thead td {
+	/*
+	color: #3D3D3D;
+	background-color: #FFF;
+	*/
+	vertical-align: top;
+	padding-top:2px;
+	padding-bottom:2px;
+	padding-left:4px;		/*Left+Right padding should match left padding for header*/
+	padding-right:4px;
+}
+
+/*Default Row Color */
+table.tablesorter tbody tr{
+	background-color: #ffffff;
+}
+/*Odd and Even Table Body Rows*/
+table.tablesorter tbody tr:nth-child(odd) {
+	/* background-color: #FFFFFF */
+}
+
+table.tablesorter tbody tr:nth-child(even), table.tablesorter thead td  {
+	background-color: #f5f5f5;
+}
+/*Add a subtle top border, the same color as even rows (that will be hidden by the normal color of even rows) so that Internet Explorer has subtle borders instead. */
+table.tablesorter tbody td, table.tablesorter thead td {
+	border-top:solid 1px #eeeeee;
+}
+t
+
+/*nth-child odd/even does not work in IE. Additionally the normal work around (using JQuery to change the class ofr each row) messes up when you sort the table (the rows retain their colour BEFORE sorting). In this work-around, we give each row a gradient instead, so that users can tell one row from the next. Note that this only works if applied to each individual cell. It cannot be applied to the row as a whole.*/
+.internet_explorer_gradient_class {
+	/* filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeff'); */
+	/* filter:  progid:DXImageTransform.Microsoft.Alpha(opacity=100); */
+}
+
+/*Class for JSMol Display Container
+Container Div is only 1 pixel wide so as to maintain width of containing column
+*/
+div.jsmol_display_container {
+	width:1px;
+	overflow:visible;
+}

@@ -1,0 +1,151 @@
+/*Override HTML defaults:
+=========================
+*/
+html {
+	height:100%;
+	overflow-y: scroll;
+}
+body {
+	height:100%;
+	background-color:#f3f3f3;
+}
+tr {
+	vertical-align:top;
+	text-align:left;
+}
+textarea {
+    resize:none;
+}
+h3 {
+	color:rgb(0,80,160);
+	font-weight:bold;
+}
+
+/*Class Styles:
+===============
+*/
+.left{
+	text-align:left;
+	float:left;
+}
+.middle {
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+}
+.right {
+	text-align:right;
+	float:right;
+}
+.top {
+	vertical-align:top;
+}
+.bottom {
+	vertical-align:bottom;
+}
+/* Reset the font style for instructions within the h3 element */
+.h3normalfont {
+	color:rgb(0,0,0);
+	font-weight:normal;
+}
+.lucida {
+	font-family:"Lucida Console", Monaco, monospace;
+}
+.highlight {
+	background-color:yellow;
+}
+/* Show/HideIfJavaScript will only work with Spans, and not Divs */
+.HideIfJavaScript {
+	display: inline;
+}
+
+.ShowIfJavaScript {
+	display: none;
+}
+.ShowIfNoSVG {
+	display: none;
+}
+.codon_color_frequency_table {
+	font-family:"Lucida Console", Monaco, monospace;
+	font-size:17px;
+}
+
+.codon_color_frequency_table_header {
+	font-weight:bold;
+}
+
+input.bluebutton{
+	color:white;
+	background:none;
+	background-color:rgb(0,70,255);
+	box-shadow:2px 2px 2px #333333;
+	border:5px solid rgb(0,70,255);
+}
+input.bluebutton:hover, input.bluebutton_hover{
+	color:white;
+	background:none;
+	background-color:rgb(0,29,106);
+	box-shadow:none;
+	border:5px solid rgb(0,29,106);
+}
+
+/*Class Styles for Submit + Setup Pages:
+========================================
+*/
+input.minimalstylebutton {
+	/* font-size: 11px; */
+	padding:2px;
+}
+
+.instructions {
+	font-size:0.9em;
+}
+.GeneralInputWidth {
+	width:490px;
+	word-wrap:break-word;
+}
+.ErrorMessage,.ErrorMessage_RightColumn {
+	color:red;
+	font-weight:bold;
+	word-wrap:break-word;
+}
+.ErrorMessage_RightColumn  {
+	width:290px;
+}
+.GeneralInputPlusErrorTotalWidth {
+	width:780px;
+}
+
+
+
+/*ID specific styles:
+=====================
+*/
+/* For the grey popup that is currently used to display help*/
+#grey_popup_holder_div {
+	text-align:center;
+	position: fixed;
+	width: 100%;
+	height: 1px;	/*low height allows user to click on the "view" button at the side of the visible popup*/
+	top: 10px;
+	left: 0px;
+	right: 0px;
+}
+
+#hide_grey_popup_holder_div_button {
+	font-size:10px;
+	font-weight:bold;
+	color: white;
+	background-color: red;
+	border: none;
+	padding:1px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	background-color: #ff0000;
+}
+
+#grey_popup_content {
+	text-align:left;
+	overflow-y:scroll;
+	max-height:450px;	/* Try to fit within a 1024x600 screen */
+}
