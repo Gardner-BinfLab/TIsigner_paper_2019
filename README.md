@@ -1,4 +1,4 @@
-#### Bhandari BK, Lim CS, Gardner PP. (2019). Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv doi:[10.1101/726752](https://www.biorxiv.org/content/10.1101/726752v1)
+#### Bhandari BK, Lim CS, Gardner PP. (2019). Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv. DOI:[10.1101/726752](https://www.biorxiv.org/content/10.1101/726752v1)
 - This repository contains the scripts and Jupyter notebooks to reproduce the results and figures of this preprint. The source code of TIsigner webserver is available [here](https://github.com/Gardner-BinfLab/TIsigner).
 - Dependencies can be installed using Anaconda3. For example,
 ```conda install -c bioconda viennarna```. ViennaRNA can also be installed according to the instructions [here](https://www.tbi.univie.ac.at/RNA/documentation.html#install).
