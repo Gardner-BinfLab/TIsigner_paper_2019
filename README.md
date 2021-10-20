@@ -1,4 +1,4 @@
-#### Bhandari BK, Lim CS, Gardner PP. (2019). Highly accessible translation initiation sites are predictive of successful heterologous protein expression. bioRxiv. DOI:[10.1101/726752](https://www.biorxiv.org/content/10.1101/726752v1)
+#### Bhandari BK, Lim CS, Remus DM, Chen A, van Dolleweerd C, Gardner PP. (2021). Analysis of 11,430 recombinant protein production experiments reveals that protein yield is tunable by synonymous codon changes of translation initiation sites. PLOS Computational Biology. 17(10), e1009461. DOI:[10.1371/journal.pcbi.1009461](https://doi.org/10.1371/journal.pcbi.1009461)
 - This repository contains the scripts and Jupyter notebooks to reproduce the results and figures of this preprint. The source code of TIsigner webserver is available [here](https://github.com/Gardner-BinfLab/TIsigner).
 - Dependencies can be installed using Anaconda3. For example,
 ```conda install -c bioconda viennarna```. ViennaRNA can also be installed according to the instructions [here](https://www.tbi.univie.ac.at/RNA/documentation.html#install).
@@ -52,4 +52,4 @@ optional arguments:
                         Number of processes to spawn. Default = half of the
                         number of CPU
 ```
-© [Bikash Kumar Bhandari](https://bkb3.github.io), [Chun Shem Lim](https://github.com/lcscs12345), [Paul P Gardner](https://github.com/ppgardne) (2019)
+© [Bikash Kumar Bhandari](https://bkb3.github.io), [Chun Shem Lim](https://github.com/lcscs12345), [Paul P Gardner](https://github.com/ppgardne) (2019-)
